@@ -6,6 +6,18 @@ import PokemonCard from "./PokemonCard";
 function PokemonGrid() {
   const [pokemons, setPokemons] = useState<Pokemon[] | null>(null);
 
+  //   useEffect(() => {
+  //     fetch("https://URL", {
+  //       headers: {
+  //         "x-api-key": "YOUR_API_KEY",
+  //       },
+  //     })
+  //          .then((res) => res.json())
+  //       .then((data) => {
+  //          do stuff
+  //       });
+  //   }, []);
+
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon")
       .then((res) => res.json())
