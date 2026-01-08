@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
-import type { Pokemon } from "../types/types";
+import { usePokemon } from "../hooks/usePokemon";
 
 function PokemonCard({ url }: { url: string }) {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const {
+    data: pokemon,
+    isLoading,
+    isError,
+    isPending,
+    error,
+  } = usePokemon(url);
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemon(data);
-      });
-  }, [url]);
+  if (isError) {
+    return <div>{error?.message}</div>;
+  }
+
+  if (isLoading || isPending) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="border-black border-2 rounded-xl shadow-xl bg-black/40 backdrop-blur">
